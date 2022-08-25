@@ -1,10 +1,12 @@
 import { Route, NavLink, Routes } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import Film from '../Film/Film';
+import { useFav } from '../FavContext/FavContext';
 import './films.css';
 
 export default function Films(props) {
   const [list, setList] = useState([]);
+  const [fav] = useFav();
   const {keyword, setSearchState} = props;
 
   useEffect(() => {
@@ -43,7 +45,12 @@ export default function Films(props) {
         {list.map((film, index) => (
           <p key={film.title}>
             <NavLink className={({ isActive }) => isActive ? "activeLink" : ""} to={`/films/${index + 1}`}>
-              {film.title}
+              {film.title}&nbsp;
+              {index + 1 === parseInt(fav.id) && (
+                <>
+                  <span className="material-icons small-font">favorite</span>
+                </>
+              )}
             </NavLink>
           </p>
         ))}

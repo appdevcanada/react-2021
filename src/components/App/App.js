@@ -4,6 +4,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import Header from '../Header/Header';
 import SearchBar from '../SearchBar/SearchBar';
 import Main from '../Main/Main';
+import { FavProvider } from '../FavContext/FavContext';
 
 export default function App(props) {
   const name = 'Star Wars API';
@@ -19,15 +20,17 @@ export default function App(props) {
   }
 
   return (
-    <div className="App">
-      <Router>
-        <Header company={name} />
-        <SearchBar keyword={keyword} saveSearch={saveSearch} btnState={disabled} />
+    <FavProvider>
+      <div className="App">
+        <Router>
+          <Header company={name} />
+          <SearchBar keyword={keyword} saveSearch={saveSearch} btnState={disabled} />
 
-        <main className="content">
-          <Main keyword={keyword} setSearchState={setSearchState} />
-        </main>
-      </Router>
-    </div>
+          <main className="content">
+            <Main keyword={keyword} setSearchState={setSearchState} />
+          </main>
+        </Router>
+      </div>
+    </FavProvider>
   );
 }
