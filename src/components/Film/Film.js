@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { useFav } from '../../context/FavContext';
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { useFav } from "../../context/FavContext";
 
 export default function Film({ findFilm }) {
   const [film, setFilm] = useState(null);
@@ -8,7 +8,12 @@ export default function Film({ findFilm }) {
   const [fav, updateFav] = useFav();
 
   function favClicked(ev) {
-    updateFav('films', parseInt(id), film);
+    if (fav.id === parseInt(id) && fav.type === "films") {
+      //clear fav
+      updateFav("", 0, {});
+      return;
+    }
+    updateFav("films", parseInt(id), film);
   }
 
   useEffect(() => {
@@ -26,7 +31,11 @@ export default function Film({ findFilm }) {
     <>
       <h2>Film Details</h2>
       {details}
-      <p><button onClick={favClicked}>Set <span className="material-icons small-font">favorite</span></button></p>
+      <p>
+        <button onClick={favClicked}>
+          Set <span className="material-icons small-font">favorite</span>
+        </button>
+      </p>
     </>
   );
 }

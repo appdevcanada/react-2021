@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { useFav } from '../../context/FavContext';
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { useFav } from "../../context/FavContext";
 
 export default function Planet({ findPlanet }) {
   const [planet, setPlanet] = useState(null);
@@ -8,7 +8,12 @@ export default function Planet({ findPlanet }) {
   const [fav, updateFav] = useFav();
 
   function favClicked(ev) {
-    updateFav('planets', parseInt(id), planet);
+    if (fav.id === parseInt(id) && fav.type === "planets") {
+      //clear fav
+      updateFav("", 0, {});
+      return;
+    }
+    updateFav("planets", parseInt(id), planet);
   }
 
   useEffect(() => {
@@ -26,7 +31,11 @@ export default function Planet({ findPlanet }) {
     <>
       <h2>Planet Details</h2>
       {details}
-      <p><button onClick={favClicked}>Set <span className="material-icons small-font">favorite</span></button></p>
+      <p>
+        <button onClick={favClicked}>
+          Set <span className="material-icons small-font">favorite</span>
+        </button>
+      </p>
     </>
   );
 }

@@ -1,24 +1,26 @@
-import { useEffect } from 'react';
-import { Route, NavLink, Routes } from 'react-router-dom';
-import { useFav } from '../../context/FavContext';
-import Planet from '../Planet/Planet';
-import './planets.css';
+import { useEffect, useState } from "react";
+import { Route, NavLink, Routes } from "react-router-dom";
+import { useFav } from "../../context/FavContext";
+import Planet from "../Planet/Planet";
+import Spinner from "../Spinner/Spinner";
+import "./planets.css";
 
 export default function Planets(props) {
   const [fav] = useFav();
-  const {list, setSearchState} = props;
+  const { list, setSearchState } = props;
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-
+    setTimeout(setLoaded, 800, true);
   }, [list]);
 
   useEffect(() => {
     setSearchState(false);
-  })
+  });
 
   function findPlanet(id) {
     const found = list.find((item, index) => parseInt(id) === index + 1);
-    if(found) {
+    if (found) {
       return found;
     }
     return null;
@@ -28,20 +30,24 @@ export default function Planets(props) {
     <>
       <div className="results">
         <h2>Planet List</h2>
-
+        {!loaded && <Spinner>Loading...</Spinner>}
         {list.length === 0 && <p>No planets...</p>}
-        {list.length > 0 && list.map((planet, index) => (
-          <p key={planet.name}>
-            <NavLink className={({ isActive }) => isActive ? "activeLink" : ""} to={`/planets/${index + 1}`}>
-              {planet.name}&nbsp;
-              {index + 1 === parseInt(fav.id) && (
-                <>
-                  <span className="material-icons small-font">favorite</span>
-                </>
-              )}
-            </NavLink>
-          </p>
-        ))}
+        {list.length > 0 &&
+          list.map((planet, index) => (
+            <p key={planet.name}>
+              <NavLink
+                className={({ isActive }) => (isActive ? "activeLink" : "")}
+                to={`/planets/${index + 1}`}
+              >
+                {planet.name}&nbsp;
+                {fav.type === "planets" && index + 1 === parseInt(fav.id) && (
+                  <>
+                    <span className="material-icons small-font">favorite</span>
+                  </>
+                )}
+              </NavLink>
+            </p>
+          ))}
       </div>
       <div className="details">
         <Routes>

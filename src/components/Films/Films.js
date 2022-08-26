@@ -1,24 +1,26 @@
-import { Route, NavLink, Routes } from 'react-router-dom';
-import { useEffect } from 'react';
-import Film from '../Film/Film';
-import { useFav } from '../../context/FavContext';
-import './films.css';
+import { Route, NavLink, Routes } from "react-router-dom";
+import { useEffect, useState } from "react";
+import Film from "../Film/Film";
+import Spinner from "../Spinner/Spinner";
+import { useFav } from "../../context/FavContext";
+import "./films.css";
 
 export default function Films(props) {
   const [fav] = useFav();
-  const {list, setSearchState} = props;
+  const { list, setSearchState } = props;
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-
+    setTimeout(setLoaded, 800, true);
   }, [list]);
 
   useEffect(() => {
     setSearchState(false);
-  })
+  });
 
   function findFilm(id) {
     const found = list.find((item, index) => parseInt(id) === index + 1);
-    if(found) {
+    if (found) {
       return found;
     }
     return null;
@@ -28,13 +30,16 @@ export default function Films(props) {
     <>
       <div className="results">
         <h2>Film List</h2>
-
+        {!loaded && <Spinner>Loading...</Spinner>}
         {list.length === 0 && <p>No films...</p>}
         {list.map((film, index) => (
           <p key={film.title}>
-            <NavLink className={({ isActive }) => isActive ? "activeLink" : ""} to={`/films/${index + 1}`}>
+            <NavLink
+              className={({ isActive }) => (isActive ? "activeLink" : "")}
+              to={`/films/${index + 1}`}
+            >
               {film.title}&nbsp;
-              {index + 1 === parseInt(fav.id) && (
+              {fav.type === "films" && index + 1 === parseInt(fav.id) && (
                 <>
                   <span className="material-icons small-font">favorite</span>
                 </>
