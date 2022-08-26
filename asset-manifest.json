@@ -1,20 +1,30 @@
 {
   "files": {
-    "main.css": "/react-2021/static/css/main.ddefc3ba.chunk.css",
-    "main.js": "/react-2021/static/js/main.014802d3.chunk.js",
-    "main.js.map": "/react-2021/static/js/main.014802d3.chunk.js.map",
-    "runtime-main.js": "/react-2021/static/js/runtime-main.11a645fe.js",
-    "runtime-main.js.map": "/react-2021/static/js/runtime-main.11a645fe.js.map",
-    "static/js/2.848ac712.chunk.js": "/react-2021/static/js/2.848ac712.chunk.js",
-    "static/js/2.848ac712.chunk.js.map": "/react-2021/static/js/2.848ac712.chunk.js.map",
+    "main.css": "/react-2021/static/css/main.658bc6bf.chunk.css",
+    "main.js": "/react-2021/static/js/main.215948ae.chunk.js",
+    "main.js.map": "/react-2021/static/js/main.215948ae.chunk.js.map",
+    "runtime-main.js": "/react-2021/static/js/runtime-main.fad011d8.js",
+    "runtime-main.js.map": "/react-2021/static/js/runtime-main.fad011d8.js.map",
+    "static/js/2.01f8e94a.chunk.js": "/react-2021/static/js/2.01f8e94a.chunk.js",
+    "static/js/2.01f8e94a.chunk.js.map": "/react-2021/static/js/2.01f8e94a.chunk.js.map",
+    "static/css/3.0209467d.chunk.css": "/react-2021/static/css/3.0209467d.chunk.css",
+    "static/js/3.3ede36f9.chunk.js": "/react-2021/static/js/3.3ede36f9.chunk.js",
+    "static/js/3.3ede36f9.chunk.js.map": "/react-2021/static/js/3.3ede36f9.chunk.js.map",
+    "static/css/4.5ce53a7b.chunk.css": "/react-2021/static/css/4.5ce53a7b.chunk.css",
+    "static/js/4.826ab5f4.chunk.js": "/react-2021/static/js/4.826ab5f4.chunk.js",
+    "static/js/4.826ab5f4.chunk.js.map": "/react-2021/static/js/4.826ab5f4.chunk.js.map",
+    "static/js/5.f9fb491e.chunk.js": "/react-2021/static/js/5.f9fb491e.chunk.js",
+    "static/js/5.f9fb491e.chunk.js.map": "/react-2021/static/js/5.f9fb491e.chunk.js.map",
     "index.html": "/react-2021/index.html",
-    "static/css/main.ddefc3ba.chunk.css.map": "/react-2021/static/css/main.ddefc3ba.chunk.css.map",
-    "static/js/2.848ac712.chunk.js.LICENSE.txt": "/react-2021/static/js/2.848ac712.chunk.js.LICENSE.txt"
+    "static/css/3.0209467d.chunk.css.map": "/react-2021/static/css/3.0209467d.chunk.css.map",
+    "static/css/4.5ce53a7b.chunk.css.map": "/react-2021/static/css/4.5ce53a7b.chunk.css.map",
+    "static/css/main.658bc6bf.chunk.css.map": "/react-2021/static/css/main.658bc6bf.chunk.css.map",
+    "static/js/2.01f8e94a.chunk.js.LICENSE.txt": "/react-2021/static/js/2.01f8e94a.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.11a645fe.js",
-    "static/js/2.848ac712.chunk.js",
-    "static/css/main.ddefc3ba.chunk.css",
-    "static/js/main.014802d3.chunk.js"
+    "static/js/runtime-main.fad011d8.js",
+    "static/js/2.01f8e94a.chunk.js",
+    "static/css/main.658bc6bf.chunk.css",
+    "static/js/main.215948ae.chunk.js"
   ]
 }

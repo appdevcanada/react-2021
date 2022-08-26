@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack://src/components/Films/films.css"],"names":[],"mappings":"AAAA,EACE,UACF,CACA,YACE,aACF,CAEA,YACE,eACF","file":"3.0209467d.chunk.css","sourcesContent":["a {\n  color: gold;\n}\n.activeLink {\n  color: orangered;\n}\n\n.small-font {\n  font-size: 0.9rem;\n}"]}
