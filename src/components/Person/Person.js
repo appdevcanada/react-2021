@@ -1,28 +1,26 @@
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { useFav } from '../../context/FavContext';
 
-export default function Person({ list }) {
-  const [found, setFound] = useState(false);
+export default function Person({ findPerson }) {
   const [person, setPerson] = useState(null);
   const { id } = useParams();
+  const [fav, updateFav] = useFav();
+
+  function favClicked(ev) {
+    updateFav('people', parseInt(id), person);
+  }
 
   useEffect(() => {
-    let person = list.find((item, index) => parseInt(id) === index + 1);
-    if(person) {
-      setPerson(person);
-      setFound(true);
-    }
-  },[found, id, list])
+    setPerson(findPerson(id));
+  },[findPerson, id])
 
   return (
     <div>
-    {found &&
-      <div>
-        <h2>Person Details {id}</h2>
-        {person && <p>{person.name}</p>}
-        {person && <p>{person.birth_year}</p>}
-      </div>
-    }
+      <h2>Person Details {id}</h2>
+      {person && <p>{person.name}</p>}
+      {person && <p>{person.birth_year}</p>}
+      <p><button onClick={favClicked}>Set <span className="material-icons small-font">favorite</span></button></p>
     </div>
   );
 }

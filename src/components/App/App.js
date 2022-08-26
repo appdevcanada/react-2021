@@ -4,7 +4,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import Header from '../Header/Header';
 import SearchBar from '../SearchBar/SearchBar';
 import Main from '../Main/Main';
-import { FavProvider } from '../FavContext/FavContext';
+import { FavProvider } from '../../context/FavContext';
 
 export default function App(props) {
   const name = 'Star Wars API';

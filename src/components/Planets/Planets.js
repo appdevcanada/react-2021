@@ -1,27 +1,16 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { Route, NavLink, Routes } from 'react-router-dom';
+import { useFav } from '../../context/FavContext';
 import Planet from '../Planet/Planet';
 import './planets.css';
 
 export default function Planets(props) {
-  const [list, setList] = useState([]);
-  const {keyword, setSearchState} = props;
+  const [fav] = useFav();
+  const {list, setSearchState} = props;
 
   useEffect(() => {
-    let url = 'https://swapi.dev/api/planets/';
-    if(keyword.trim() !== "") {
-      url += `?search=${keyword}`;
-    }
-    fetch(url)
-      .then((resp) => {
-        if (!resp.ok) throw new Error(resp.statusText);
-        return resp.json();
-      })
-      .then((data) => {
-        setList(data.results);
-      })
-      .catch(console.warn);
-  }, [keyword]);
+
+  }, [list]);
 
   useEffect(() => {
     setSearchState(false);
@@ -34,6 +23,7 @@ export default function Planets(props) {
     }
     return null;
   }
+
   return (
     <>
       <div className="results">
@@ -43,7 +33,12 @@ export default function Planets(props) {
         {list.length > 0 && list.map((planet, index) => (
           <p key={planet.name}>
             <NavLink className={({ isActive }) => isActive ? "activeLink" : ""} to={`/planets/${index + 1}`}>
-              {planet.name}
+              {planet.name}&nbsp;
+              {index + 1 === parseInt(fav.id) && (
+                <>
+                  <span className="material-icons small-font">favorite</span>
+                </>
+              )}
             </NavLink>
           </p>
         ))}

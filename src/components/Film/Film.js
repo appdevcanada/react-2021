@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { useFav } from '../FavContext/FavContext';
+import { useFav } from '../../context/FavContext';
 
 export default function Film({ findFilm }) {
   const [film, setFilm] = useState(null);

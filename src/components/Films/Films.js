@@ -1,29 +1,16 @@
 import { Route, NavLink, Routes } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import Film from '../Film/Film';
-import { useFav } from '../FavContext/FavContext';
+import { useFav } from '../../context/FavContext';
 import './films.css';
 
 export default function Films(props) {
-  const [list, setList] = useState([]);
   const [fav] = useFav();
-  const {keyword, setSearchState} = props;
+  const {list, setSearchState} = props;
 
   useEffect(() => {
-    let url = 'https://swapi.dev/api/films/';
-    if(keyword.trim() !== "") {
-      url += `?search=${keyword}`;
-    }
-    fetch(url)
-      .then((resp) => {
-        if (!resp.ok) throw new Error(resp.statusText);
-        return resp.json();
-      })
-      .then((data) => {
-        setList(data.results);
-      })
-      .catch(console.warn);
-  }, [keyword]);
+
+  }, [list]);
 
   useEffect(() => {
     setSearchState(false);
@@ -36,6 +23,7 @@ export default function Films(props) {
     }
     return null;
   }
+
   return (
     <>
       <div className="results">
