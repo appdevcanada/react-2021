@@ -1,18 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect, lazy, Suspense } from "react";
 import { NavLink, Routes, Route } from "react-router-dom";
-import Person from "../Person/Person";
-import Spinner from "../Spinner/Spinner";
 import { useFav } from "../../context/FavContext";
+import Spinner from "../Spinner/Spinner";
 import "./people.css";
 
 export default function People(props) {
+  const Person = lazy(() => import("../Person/Person"));
   const [fav] = useFav();
   const { list, setSearchState } = props;
-  const [loaded, setLoaded] = useState(false);
 
-  useEffect(() => {
-    setTimeout(setLoaded, 800, true);
-  }, [list]);
+  useEffect(() => {}, [list]);
 
   useEffect(() => {
     setSearchState(false);
@@ -25,11 +22,11 @@ export default function People(props) {
     }
     return null;
   }
+
   return (
     <>
       <div className="results">
         <h2>People List</h2>
-        {!loaded && <Spinner>Loading...</Spinner>}
         {list.length === 0 && <p>No people...</p>}
         {list.length > 0 &&
           list.map((item, index) => (
@@ -50,7 +47,14 @@ export default function People(props) {
       </div>
       <div className="details">
         <Routes>
-          <Route path=":id" element={<Person findPerson={findPerson} />} />
+          <Route
+            path=":id"
+            element={
+              <Suspense fallback={<Spinner>Loading Details</Spinner>}>
+                <Person findPerson={findPerson} />
+              </Suspense>
+            }
+          />
         </Routes>
       </div>
     </>

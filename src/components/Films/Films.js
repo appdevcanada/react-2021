@@ -1,18 +1,15 @@
-import { Route, NavLink, Routes } from "react-router-dom";
-import { useEffect, useState } from "react";
-import Film from "../Film/Film";
-import Spinner from "../Spinner/Spinner";
+import { useEffect, lazy, Suspense } from "react";
+import { NavLink, Routes, Route } from "react-router-dom";
 import { useFav } from "../../context/FavContext";
+import Spinner from "../Spinner/Spinner";
 import "./films.css";
 
 export default function Films(props) {
+  const Film = lazy(() => import("../Film/Film"));
   const [fav] = useFav();
   const { list, setSearchState } = props;
-  const [loaded, setLoaded] = useState(false);
 
-  useEffect(() => {
-    setTimeout(setLoaded, 800, true);
-  }, [list]);
+  useEffect(() => {}, [list]);
 
   useEffect(() => {
     setSearchState(false);
@@ -30,7 +27,6 @@ export default function Films(props) {
     <>
       <div className="results">
         <h2>Film List</h2>
-        {!loaded && <Spinner>Loading...</Spinner>}
         {list.length === 0 && <p>No films...</p>}
         {list.map((film, index) => (
           <p key={film.title}>
@@ -50,7 +46,14 @@ export default function Films(props) {
       </div>
       <div className="details">
         <Routes>
-          <Route path=":id" element={<Film findFilm={findFilm} />} />
+          <Route
+            path=":id"
+            element={
+              <Suspense fallback={<Spinner>Loading Details</Spinner>}>
+                <Film findFilm={findFilm} />
+              </Suspense>
+            }
+          />
         </Routes>
       </div>
     </>

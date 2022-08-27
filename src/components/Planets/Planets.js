@@ -1,18 +1,15 @@
-import { useEffect, useState } from "react";
-import { Route, NavLink, Routes } from "react-router-dom";
+import { useEffect, lazy, Suspense } from "react";
+import { NavLink, Routes, Route } from "react-router-dom";
 import { useFav } from "../../context/FavContext";
-import Planet from "../Planet/Planet";
 import Spinner from "../Spinner/Spinner";
 import "./planets.css";
 
 export default function Planets(props) {
+  const Planet = lazy(() => import("../Planet/Planet"));
   const [fav] = useFav();
   const { list, setSearchState } = props;
-  const [loaded, setLoaded] = useState(false);
 
-  useEffect(() => {
-    setTimeout(setLoaded, 800, true);
-  }, [list]);
+  useEffect(() => {}, [list]);
 
   useEffect(() => {
     setSearchState(false);
@@ -30,7 +27,6 @@ export default function Planets(props) {
     <>
       <div className="results">
         <h2>Planet List</h2>
-        {!loaded && <Spinner>Loading...</Spinner>}
         {list.length === 0 && <p>No planets...</p>}
         {list.length > 0 &&
           list.map((planet, index) => (
@@ -51,7 +47,14 @@ export default function Planets(props) {
       </div>
       <div className="details">
         <Routes>
-          <Route path=":id" element={<Planet findPlanet={findPlanet} />} />
+          <Route
+            path=":id"
+            element={
+              <Suspense fallback={<Spinner>Loading Details</Spinner>}>
+                <Planet findPlanet={findPlanet} />
+              </Suspense>
+            }
+          />
         </Routes>
       </div>
     </>
