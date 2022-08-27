@@ -1,7 +1,6 @@
 import { useEffect, lazy, Suspense } from "react";
 import { NavLink, Routes, Route } from "react-router-dom";
 import { useFav } from "../../context/FavContext";
-import Spinner from "../Spinner/Spinner";
 import "./films.css";
 
 export default function Films(props) {
@@ -49,7 +48,7 @@ export default function Films(props) {
           <Route
             path=":id"
             element={
-              <Suspense fallback={<Spinner>Loading Details</Spinner>}>
+              <Suspense>
                 <Film findFilm={findFilm} />
               </Suspense>
             }

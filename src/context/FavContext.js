@@ -1,29 +1,30 @@
-import { useState, useContext, createContext } from 'react';
+import { useContext, createContext } from "react";
+import useLocalStorage from "../hooks/useLocalStorage";
 
 const FavContext = createContext();
 
 function FavProvider(props) {
   const shape = {
-    type: '',
+    type: "",
     id: 0,
-    data: {}
-  }
-  const [fav, setFav] = useState(shape);
+    data: {},
+  };
+  const [fav, setFav] = useLocalStorage("MyFav", shape);
 
   function updateFav(type, id, data) {
     setFav({
       type,
       id,
-      data
+      data,
     });
   }
 
-  return <FavContext.Provider value={[fav, updateFav]} {...props} />
+  return <FavContext.Provider value={[fav, updateFav]} {...props} />;
 }
 
 function useFav() {
   const context = useContext(FavContext);
-  if (!context) throw new Error('No context available!');
+  if (!context) throw new Error("No context available!");
 
   return context;
 }

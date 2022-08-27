@@ -1,7 +1,6 @@
 import { useEffect, lazy, Suspense } from "react";
 import { NavLink, Routes, Route } from "react-router-dom";
 import { useFav } from "../../context/FavContext";
-import Spinner from "../Spinner/Spinner";
 import "./planets.css";
 
 export default function Planets(props) {
@@ -50,7 +49,7 @@ export default function Planets(props) {
           <Route
             path=":id"
             element={
-              <Suspense fallback={<Spinner>Loading Details</Spinner>}>
+              <Suspense>
                 <Planet findPlanet={findPlanet} />
               </Suspense>
             }

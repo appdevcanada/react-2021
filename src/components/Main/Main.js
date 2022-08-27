@@ -58,7 +58,7 @@ export default function Main(props) {
         <Route
           path="/films/*"
           element={
-            <Suspense fallback={<Spinner>Loading Films</Spinner>}>
+            <Suspense fallback={<Spinner>Loading Data</Spinner>}>
               <Films list={films} setSearchState={setSearchState} />
             </Suspense>
           }
@@ -66,7 +66,7 @@ export default function Main(props) {
         <Route
           path="/people/*"
           element={
-            <Suspense fallback={<Spinner>Loading People</Spinner>}>
+            <Suspense fallback={<Spinner>Loading Data</Spinner>}>
               <People list={people} setSearchState={setSearchState} />
             </Suspense>
           }
@@ -74,7 +74,7 @@ export default function Main(props) {
         <Route
           path="/planets/*"
           element={
-            <Suspense fallback={<Spinner>Loading Planets</Spinner>}>
+            <Suspense fallback={<Spinner>Loading Data</Spinner>}>
               <Planets list={planets} setSearchState={setSearchState} />
             </Suspense>
           }

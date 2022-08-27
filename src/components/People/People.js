@@ -1,7 +1,6 @@
 import { useEffect, lazy, Suspense } from "react";
 import { NavLink, Routes, Route } from "react-router-dom";
 import { useFav } from "../../context/FavContext";
-import Spinner from "../Spinner/Spinner";
 import "./people.css";
 
 export default function People(props) {
@@ -50,7 +49,7 @@ export default function People(props) {
           <Route
             path=":id"
             element={
-              <Suspense fallback={<Spinner>Loading Details</Spinner>}>
+              <Suspense>
                 <Person findPerson={findPerson} />
               </Suspense>
             }
