@@ -5,10 +5,10 @@ import { useFav } from "../../context/FavContext";
 export default function Planet({ findPlanet }) {
   const [planet, setPlanet] = useState(null);
   const { id } = useParams();
-  const [fav, updateFav] = useFav();
+  const [favFilm, favPerson, favPlanet, updateFav] = useFav();
 
   function favClicked(ev) {
-    if (fav.id === parseInt(id) && fav.type === "planets") {
+    if (favPlanet.id === parseInt(id) && favPlanet.type === "planets") {
       //clear fav
       updateFav("", 0, {});
       return;
@@ -33,7 +33,8 @@ export default function Planet({ findPlanet }) {
       {details}
       <p>
         <button onClick={favClicked}>
-          Set <span className="material-icons small-font">favorite</span>
+          Set{" "}
+          <span className="material-icons small-font red-font">favorite</span>
         </button>
       </p>
     </>

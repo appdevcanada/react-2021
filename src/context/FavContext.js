@@ -9,17 +9,47 @@ function FavProvider(props) {
     id: 0,
     data: {},
   };
-  const [fav, setFav] = useLocalStorage("MyFav", shape);
+  const [favFilm, setFavFilm] = useLocalStorage("FavFilm", shape);
+  const [favPerson, setFavPerson] = useLocalStorage("FavPerson", shape);
+  const [favPlanet, setFavPlanet] = useLocalStorage("FavPlanet", shape);
 
   function updateFav(type, id, data) {
-    setFav({
-      type,
-      id,
-      data,
-    });
+    switch (type) {
+      case "films":
+        setFavFilm({
+          type,
+          id,
+          data,
+        });
+        break;
+
+      case "people":
+        setFavPerson({
+          type,
+          id,
+          data,
+        });
+        break;
+
+      case "planets":
+        setFavPlanet({
+          type,
+          id,
+          data,
+        });
+        break;
+
+      default:
+        break;
+    }
   }
 
-  return <FavContext.Provider value={[fav, updateFav]} {...props} />;
+  return (
+    <FavContext.Provider
+      value={[favFilm, favPerson, favPlanet, updateFav]}
+      {...props}
+    />
+  );
 }
 
 function useFav() {

@@ -5,7 +5,7 @@ import "./planets.css";
 
 export default function Planets(props) {
   const Planet = lazy(() => import("../Planet/Planet"));
-  const [fav] = useFav();
+  const [favFilm, favPerson, favPlanet] = useFav();
   const { list, setSearchState } = props;
 
   useEffect(() => {}, [list]);
@@ -35,11 +35,14 @@ export default function Planets(props) {
                 to={`/planets/${index + 1}`}
               >
                 {planet.name}&nbsp;
-                {fav.type === "planets" && index + 1 === parseInt(fav.id) && (
-                  <>
-                    <span className="material-icons small-font">favorite</span>
-                  </>
-                )}
+                {favPlanet.type === "planets" &&
+                  index + 1 === parseInt(favPlanet.id) && (
+                    <>
+                      <span className="material-icons small-font red-font">
+                        favorite
+                      </span>
+                    </>
+                  )}
               </NavLink>
             </p>
           ))}

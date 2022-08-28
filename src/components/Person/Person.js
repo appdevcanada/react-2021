@@ -5,10 +5,10 @@ import { useFav } from "../../context/FavContext";
 export default function Person({ findPerson }) {
   const [person, setPerson] = useState(null);
   const { id } = useParams();
-  const [fav, updateFav] = useFav();
+  const [favFilm, favPerson, favPlanet, updateFav] = useFav();
 
   function favClicked(ev) {
-    if (fav.id === parseInt(id) && fav.type === "people") {
+    if (favPerson.id === parseInt(id) && favPerson.type === "people") {
       //clear fav
       updateFav("", 0, {});
       return;
@@ -27,7 +27,8 @@ export default function Person({ findPerson }) {
       {person && <p>{person.birth_year}</p>}
       <p>
         <button onClick={favClicked}>
-          Set <span className="material-icons small-font">favorite</span>
+          Set{" "}
+          <span className="material-icons small-font red-font">favorite</span>
         </button>
       </p>
     </div>

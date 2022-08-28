@@ -1,9 +1,9 @@
 import "./main.css";
 import Home from "../Home/Home";
 import Sub from "../Sub/Sub";
+import useStarWars from "../../hooks/useStarWars";
 import { Route, Routes, useLocation } from "react-router-dom";
-import { useEffect, useState, lazy, Suspense } from "react";
-import axios from "axios";
+import { useEffect, lazy, Suspense } from "react";
 import Spinner from "../Spinner/Spinner";
 
 export default function Main(props) {
@@ -13,44 +13,32 @@ export default function Main(props) {
   const Planets = lazy(() => import("../Planets/Planets"));
   const { keyword, setSearchState } = props;
   const { pathname } = useLocation();
-  const [films, setFilms] = useState([]);
-  const [people, setPeople] = useState([]);
-  const [planets, setPlanets] = useState([]);
+  const [films, setFilms] = useStarWars("films");
+  const [people, setPeople] = useStarWars("people");
+  const [planets, setPlanets] = useStarWars("planets");
 
   useEffect(() => {
     (async function () {
       if (pathname !== home) {
-        let url = `https://swapi.dev/api${pathname}`;
+        switch (pathname) {
+          case "/films":
+            setFilms(keyword);
+            break;
 
-        if (keyword.trim() !== "") {
-          url += `?search=${keyword}`;
+          case "/people":
+            setPeople(keyword);
+            break;
+
+          case "/planets":
+            setPlanets(keyword);
+            break;
+
+          default:
+            break;
         }
-
-        axios
-          .get(url)
-          .then((resp) => {
-            let data = resp.data;
-            switch (pathname) {
-              case "/films":
-                setFilms(data.results);
-                break;
-
-              case "/people":
-                setPeople(data.results);
-                break;
-
-              case "/planets":
-                setPlanets(data.results);
-                break;
-
-              default:
-                break;
-            }
-          })
-          .catch(console.error);
       }
     })();
-  }, [keyword, pathname]);
+  }, [keyword, pathname, setFilms, setPeople, setPlanets]);
 
   return (
     <div className="mainContent">

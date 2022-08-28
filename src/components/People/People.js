@@ -5,7 +5,7 @@ import "./people.css";
 
 export default function People(props) {
   const Person = lazy(() => import("../Person/Person"));
-  const [fav] = useFav();
+  const [favFilm, favPerson, favPlanet] = useFav();
   const { list, setSearchState } = props;
 
   useEffect(() => {}, [list]);
@@ -35,11 +35,14 @@ export default function People(props) {
                 to={`/people/${index + 1}`}
               >
                 {item.name}&nbsp;
-                {fav.type === "people" && index + 1 === parseInt(fav.id) && (
-                  <>
-                    <span className="material-icons small-font">favorite</span>
-                  </>
-                )}
+                {favPerson.type === "people" &&
+                  index + 1 === parseInt(favPerson.id) && (
+                    <>
+                      <span className="material-icons small-font red-font">
+                        favorite
+                      </span>
+                    </>
+                  )}
               </NavLink>
             </p>
           ))}

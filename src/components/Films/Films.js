@@ -5,7 +5,7 @@ import "./films.css";
 
 export default function Films(props) {
   const Film = lazy(() => import("../Film/Film"));
-  const [fav] = useFav();
+  const [favFilm, favPerson, favPlanet] = useFav();
   const { list, setSearchState } = props;
 
   useEffect(() => {}, [list]);
@@ -34,9 +34,11 @@ export default function Films(props) {
               to={`/films/${index + 1}`}
             >
               {film.title}&nbsp;
-              {fav.type === "films" && index + 1 === parseInt(fav.id) && (
+              {favFilm.type === "films" && index + 1 === parseInt(favFilm.id) && (
                 <>
-                  <span className="material-icons small-font">favorite</span>
+                  <span className="material-icons small-font red-font">
+                    favorite
+                  </span>
                 </>
               )}
             </NavLink>
