@@ -5,7 +5,7 @@ import { useFav } from "../../context/FavContext";
 export default function Film({ findFilm }) {
   const [film, setFilm] = useState(null);
   const { id } = useParams();
-  const [favFilm, , , updateFav] = useFav();
+  const [favFilm, , , , updateFav] = useFav();
 
   function favClicked(ev) {
     if (favFilm.id === parseInt(id) && favFilm.type === "films") {
@@ -22,8 +22,9 @@ export default function Film({ findFilm }) {
 
   let details = (
     <>
-      <p>{film && film.title}</p>
-      <p>{film && film.release_date}</p>
+      {film && <p>Title: {film.title}</p>}
+      {film && <p>Release Date: {film.release_date}</p>}
+      {film && <p>Introduction: {film.opening_crawl}</p>}
     </>
   );
 

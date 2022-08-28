@@ -5,7 +5,7 @@ import { useFav } from "../../context/FavContext";
 export default function Person({ findPerson }) {
   const [person, setPerson] = useState(null);
   const { id } = useParams();
-  const [, favPerson, , updateFav] = useFav();
+  const [, favPerson, , , updateFav] = useFav();
 
   function favClicked(ev) {
     if (favPerson.id === parseInt(id) && favPerson.type === "people") {
@@ -23,8 +23,10 @@ export default function Person({ findPerson }) {
   return (
     <div>
       <h2>Person Details {id}</h2>
-      {person && <p>{person.name}</p>}
-      {person && <p>{person.birth_year}</p>}
+      {person && <p>Name: {person.name}</p>}
+      {person && <p>Height: {person.height} cm</p>}
+      {person && <p>Weight: {person.mass} kg</p>}
+      {person && <p>Birth: {person.birth_year}</p>}
       <p>
         <button onClick={favClicked}>
           Set{" "}

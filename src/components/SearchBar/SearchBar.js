@@ -1,14 +1,16 @@
-import './searchbar.css';
-import { createRef } from 'react';
+import "./searchbar.css";
+import { createRef } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function SearchBar(props) {
   let inputSearch = createRef();
   let btnSearch = createRef();
-  const {btnState, keyword} = props;
+  let navigate = useNavigate();
+  const { btnState, keyword, category } = props;
 
   function submitted(ev) {
     ev.preventDefault();
-    props.saveSearch(inputSearch.current.value);
+    navigate(`/${category}?search=${inputSearch.current.value}`);
     inputSearch.current.value = "";
   }
 
@@ -28,11 +30,16 @@ export default function SearchBar(props) {
           type="submit"
           className="searchBtn"
           name="searchBtn"
-          disabled={btnState}>
+          disabled={btnState}
+        >
           Search
         </button>
       </form>
-      {keyword && <p className="margin-0">You searched for <strong>{keyword}</strong></p>}
+      {keyword && (
+        <p className="margin-0">
+          You searched for <strong>{keyword}</strong>
+        </p>
+      )}
     </section>
   );
 }

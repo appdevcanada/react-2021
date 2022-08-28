@@ -8,12 +8,27 @@ export default function useStarWars(category) {
   axios.defaults.baseURL = "https://swapi.dev/api";
 
   useEffect(() => {
+    const controller = new AbortController();
     axios
-      .get(category, { params: { search: keyword }, timeout: 4000 })
+      .get(category, {
+        params: { search: keyword },
+        timeout: 4000,
+      })
       .then((response) => {
         setList(response.data.results);
       })
-      .catch(console.error);
+      .catch((err) => {
+        if (axios.isCancel(err)) {
+          console.warn("API Call canceled");
+        } else {
+          console.log(err.message);
+        }
+      });
+
+    return () => {
+      // Abort axios fetch everytime a new fetch is demanded
+      controller.abort();
+    };
   }, [category, setList, keyword]);
 
   return [list, setKeyword];

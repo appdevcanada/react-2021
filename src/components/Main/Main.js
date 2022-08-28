@@ -2,7 +2,7 @@ import "./main.css";
 import Home from "../Home/Home";
 import Sub from "../Sub/Sub";
 import useStarWars from "../../hooks/useStarWars";
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import { useEffect, lazy, Suspense } from "react";
 import Spinner from "../Spinner/Spinner";
 
@@ -11,34 +11,38 @@ export default function Main(props) {
   const Films = lazy(() => import("../Films/Films"));
   const People = lazy(() => import("../People/People"));
   const Planets = lazy(() => import("../Planets/Planets"));
-  const { keyword, setSearchState } = props;
-  const { pathname } = useLocation();
+  const Starships = lazy(() => import("../Starships/Starships"));
+  const { keyword, setSearchState, category } = props;
   const [films, setFilms] = useStarWars("films");
   const [people, setPeople] = useStarWars("people");
   const [planets, setPlanets] = useStarWars("planets");
+  const [starships, setStarships] = useStarWars("starships");
 
   useEffect(() => {
-    (async function () {
-      if (pathname !== home) {
-        switch (pathname) {
-          case "/films":
-            setFilms(keyword);
-            break;
+    if (category !== home) {
+      switch (category) {
+        case "films":
+          setFilms(keyword);
+          break;
 
-          case "/people":
-            setPeople(keyword);
-            break;
+        case "people":
+          setPeople(keyword);
+          break;
 
-          case "/planets":
-            setPlanets(keyword);
-            break;
+        case "planets":
+          setPlanets(keyword);
+          break;
 
-          default:
-            break;
-        }
+        case "starships":
+          setStarships(keyword);
+          break;
+
+        default:
+          break;
       }
-    })();
-  }, [keyword, pathname, setFilms, setPeople, setPlanets]);
+    }
+    window.scrollTo(0, 0);
+  }, [category, keyword, setFilms, setPeople, setPlanets, setStarships]);
 
   return (
     <div className="mainContent">
@@ -64,6 +68,14 @@ export default function Main(props) {
           element={
             <Suspense fallback={<Spinner>Loading Data</Spinner>}>
               <Planets list={planets} setSearchState={setSearchState} />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/starships/*"
+          element={
+            <Suspense fallback={<Spinner>Loading Data</Spinner>}>
+              <Starships list={starships} setSearchState={setSearchState} />
             </Suspense>
           }
         />
