@@ -5,7 +5,7 @@ import "./films.css";
 
 export default function Films(props) {
   const Film = lazy(() => import("../Film/Film"));
-  const [favFilm, favPerson, favPlanet] = useFav();
+  const [favFilm, ,] = useFav();
   const { list, setSearchState } = props;
 
   useEffect(() => {}, [list]);

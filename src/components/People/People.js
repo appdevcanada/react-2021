@@ -5,7 +5,7 @@ import "./people.css";
 
 export default function People(props) {
   const Person = lazy(() => import("../Person/Person"));
-  const [favFilm, favPerson, favPlanet] = useFav();
+  const [, favPerson] = useFav();
   const { list, setSearchState } = props;
 
   useEffect(() => {}, [list]);

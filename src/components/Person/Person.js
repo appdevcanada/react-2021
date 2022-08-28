@@ -5,7 +5,7 @@ import { useFav } from "../../context/FavContext";
 export default function Person({ findPerson }) {
   const [person, setPerson] = useState(null);
   const { id } = useParams();
-  const [favFilm, favPerson, favPlanet, updateFav] = useFav();
+  const [, favPerson, , updateFav] = useFav();
 
   function favClicked(ev) {
     if (favPerson.id === parseInt(id) && favPerson.type === "people") {

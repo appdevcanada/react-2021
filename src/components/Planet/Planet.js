@@ -5,7 +5,7 @@ import { useFav } from "../../context/FavContext";
 export default function Planet({ findPlanet }) {
   const [planet, setPlanet] = useState(null);
   const { id } = useParams();
-  const [favFilm, favPerson, favPlanet, updateFav] = useFav();
+  const [, , favPlanet, updateFav] = useFav();
 
   function favClicked(ev) {
     if (favPlanet.id === parseInt(id) && favPlanet.type === "planets") {

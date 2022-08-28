@@ -5,7 +5,7 @@ import "./planets.css";
 
 export default function Planets(props) {
   const Planet = lazy(() => import("../Planet/Planet"));
-  const [favFilm, favPerson, favPlanet] = useFav();
+  const [, , favPlanet] = useFav();
   const { list, setSearchState } = props;
 
   useEffect(() => {}, [list]);
