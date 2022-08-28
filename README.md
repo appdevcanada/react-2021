@@ -1,6 +1,6 @@
 # React App using Star Wars API (SWAPI) Database
 
-## This project uses a lot of components as Routes, Axios, Router DOM, gh-pages, etc. All updated to React 18.2 version, including Navigate, Abort, Route elements...
+### This project uses a lot of components as Routes, Axios, Router DOM, gh-pages, etc. All updated to React 18.2 version, including Navigate, Abort, Route elements...
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
