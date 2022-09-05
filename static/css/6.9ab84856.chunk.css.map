@@ -1,1 +1,0 @@
-{"version":3,"sources":["webpack://src/components/Starships/starships.css"],"names":[],"mappings":"AAAA,EACE,UACF,CAEA,YACE,aACF","file":"6.9ab84856.chunk.css","sourcesContent":["a {\n  color: gold;\n}\n\n.activeLink {\n  color: orangered;\n}"]}
